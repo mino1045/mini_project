@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <annotation-driven></annotation-driven>
+  <resources location="/" mapping="/**"></resources>
+  
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<beans:property name="prefix" value="/"></beans:property>
+  	<beans:property name="suffix" value=".jsp"></beans:property>
+  </beans:bean>
+  
+  <!-- 개별 Controller 추가 패키지 및 class명을 설정하여 작동시키도록 합니다. -->
+  <!-- 
+  <beans:bean class="package.class1"></beans:bean>
+  <beans:bean class="package.class2"></beans:bean>
+  -->
+  <!--context : 전체 그룹을 관리하는 태그-->
+  <context:component-scan base-package="realty"/>
+  
+  
+  		
+  <!-- Spring I/O를 사용하기 위한 환경설정 
+    defaultEncoding : 파일명의 기본 언어셋
+    maxUploadSize : 최대 업로드 파일 크기 (-1 : 용량제한 없음)
+    maxInMemorySize : Tomcat에서 사용되는 메모리 사이즈를 말함 (파일 업로드시 작동되는 메모리량)
+  -->		
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  <beans:property name="defaultEncoding" value="utf-8"/>
+   
+  <beans:property name="maxUploadSize" value="-1" />
+  <!--
+  <beans:property name="maxUploadSize" value="2097152" />
+  -->
+  <beans:property name="maxInMemorySize" value="2097152"/>
+  </beans:bean>		
+		
+</beans:beans>
