@@ -20,7 +20,7 @@ function email_reg(){
 //////////이메일 중복체크
 
 function email_check(){
-	var memail = document.getElementsByName('memail')[0].value;
+	var memail = document.getElementsByName('memail')[0];
 	var m_dup = document.getElementById("email_dup");
 
 	
@@ -37,9 +37,12 @@ function email_check(){
 			if(this.response == "ok"){
 				alert("사용 가능한 이메일입니다");
 				m_dup.value = "Y";
+				memail.readOnly = true;
+				memail.style.backgroundColor = "#f0f0f0";
 			}else{
 				alert("이미 사용 중인 이메일입니다.");
 			}
+	
 		} else{
 			console.log(this.response);
 
@@ -47,7 +50,7 @@ function email_check(){
 	}
 	http.open("POST","./email_check.do",true);
 	http.setRequestHeader("content-type","application/x-www-form-urlencoded")
-	http.send("memail=" + memail);	
+	http.send("memail=" + memail.value);	
 	}
 	
 	

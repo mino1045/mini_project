@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller
 public class member_controller {
 	@Resource(name = "member_dto")
@@ -25,17 +26,19 @@ public class member_controller {
 	
 	PrintWriter pw = null;
 	
-	//이메일 찾기
+	//비밀번호 찾기
 	@PostMapping("/realty/search_email.do")
-	public String search_email (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpServletRequest req) throws Exception {
+	public String search_pass (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpSession se) throws Exception {
+
 		res.setContentType("text/html;charset=utf-8");
 		this.pw = res.getWriter();
-		
-		member_dto result = this.dao.search_email(dto);
+
+		member_dto result = this.dao.search_pass(dto);
 		
 		if(result != null) {
+			se.setAttribute("memail", result.getMemail());
+			System.out.println(result.getMemail());
 			this.pw.write("ok");
-			req.setAttribute("memail", dto.getMemail());
 		} else {
 			this.pw.write("false");
 		}
@@ -43,6 +46,63 @@ public class member_controller {
 	}
 	
 	
+
+	/////이메일찾기성공링크
+	@GetMapping("/realty/search_myinfo.do")
+	public String search_myinfo(HttpSession se, Model m)  {
+		String memail = (String) se.getAttribute("memail");
+		if (memail != null) {
+			m.addAttribute("memail",memail);
+		} else {
+			m.addAttribute("error","회원정보가 없습니다.");
+		}
+	
+		return "realty/search_myinfo";
+	}
+
+	
+	/*
+	//이메일 찾기
+	@PostMapping("/realty/search_email.do")
+	public String search_email (@ModelAttribute(name = "dto") member_dto dto, Model m) throws Exception {
+
+		member_dto result = this.dao.search_email(dto);
+		System.out.println("로그확인");
+		System.out.println(result.getMemail());
+		if(result != null) {
+		m.addAttribute("memail",result.getMemail());
+
+		return "realty/search_myinfo";
+		} else {
+		m.addAttribute("error", "controller : 회원정보가 없습니다.");
+        return "realty/search_email";
+			
+		}
+
+	}
+	*/
+	
+	
+
+	//이메일 찾기
+	@PostMapping("/realty/search_email.do")
+	public String search_email (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpSession se) throws Exception {
+
+		res.setContentType("text/html;charset=utf-8");
+		this.pw = res.getWriter();
+
+		member_dto result = this.dao.search_email(dto);
+		
+		if(result != null) {
+			se.setAttribute("memail", result.getMemail());
+			System.out.println(result.getMemail());
+			this.pw.write("ok");
+		} else {
+			this.pw.write("false");
+		}
+		return null;
+	}
+
 	//회원가입
 	@PostMapping("/realty/joinok.do")
 	public String joinok(member_dto m_dto,Model m) throws Exception {
@@ -65,7 +125,7 @@ public class member_controller {
 				this.pw.write("ok");
 				se.setAttribute("memail", loginfo.getMemail());
 				se.setAttribute("mname", loginfo.getMname());
-				System.out.println(loginfo.getMname());
+				//System.out.println(loginfo.getMname());
 		
 			}else {
 				this.pw.write("false");
@@ -127,6 +187,8 @@ public class member_controller {
 	public String index()  {
 		return "realty/index";
 	}
+
+
 
 }
 

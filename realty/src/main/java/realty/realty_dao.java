@@ -51,6 +51,19 @@ public class realty_dao implements mapper{
 		
 		return result;
 	}
+
+
+	@Override
+	public member_dto search_pass(member_dto dto) {
+		Map<String, String> getpassinfo = new HashMap<String, String>();
+		getpassinfo.put("mtel", dto.getMtel());
+		getpassinfo.put("memail", dto.getMemail());
+		
+		member_dto result = this.st.selectOne("search_pass",getpassinfo);
+
+		
+		return result;
+	}
 	
 	
 

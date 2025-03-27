@@ -36,4 +36,7 @@
 
 </body>
 <script src="./js/search.js?v=2"></script>
+<script>
+${msg}
+</script>
 </html>
