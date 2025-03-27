@@ -40,4 +40,5 @@
     </ol>
   </div>
  </footer>
+ <script src="./js/index.js?v=1"></script>
   <!--copyright 끝  -->

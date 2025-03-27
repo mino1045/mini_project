@@ -51,20 +51,26 @@ function email_check(){
 	}
 	
 	
-//////////비밀번호 체크
+//////////비밀번호 동일 및 유효성 체크
 function pwck(){
 	var mpass = document.getElementsByName("mpass")[0].value;
 	var mpasscheck = document.getElementById("mpass_check").value;
 	var mpass_message = document.getElementById("mpass_message");
 	
+	var pass_reg = 	/^(?=.*[a-zA-Z])(?=.*[!@#$%^\*\+=\-\.])(?=.*[0-9]).{10,16}$/;
+
 	mpass_message.textContent = "";
 	
 	if(!mpass){
 		mpass_message.textContent = "비밀번호를 입력해주세요";
 		return false;
-	} else if(mpass !== mpasscheck) {
-		mpass_message.textContent = "동일한 비밀번호를 입력해주세요";
-		
+	} else if(!pass_reg.test(mpass)) { //
+		mpass_message.textContent = "조건에 맞는 비밀번호를 입력해주세요";
+		return false;
+	} else if(mpass != mpasscheck) { //
+	mpass_message.textContent = "동일한 비밀번호를 입력해주세요";
+	return false;
+	
 	} else {
 		return true;
 	}

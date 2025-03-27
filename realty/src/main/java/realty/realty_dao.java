@@ -39,6 +39,18 @@ public class realty_dao implements mapper{
 		member_dto email_used = this.st.selectOne("email_check",memail);
 		return email_used;
 	}
+
+	/////search_email
+	@Override
+	public member_dto search_email(member_dto dto) {
+		Map<String, String> getemailinfo = new HashMap<String, String>();
+		getemailinfo.put("mtel", dto.getMtel());
+		getemailinfo.put("mname", dto.getMname());
+		
+		member_dto result = this.st.selectOne("search_email",getemailinfo);
+		
+		return result;
+	}
 	
 	
 

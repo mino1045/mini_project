@@ -4,9 +4,15 @@
 
 <!--member mapper-->
 
+<!--아이디 찾기  -->
+<select id="search_email" resultType="member_dto" parameterType="Map">
+select memail,mtel,mname from member where mtel=#{mtel} and mname=#{mname}
+</select>
+
+
 <!--로그인  -->
 <select id="member_login" resultType="member_dto" parameterType="Map">
-select memail,mpass from member where memail=#{memail} and mpass=#{mpass}
+select memail,mpass,mname from member where memail=#{memail} and mpass=#{mpass}
 </select>
 
 <!--회원가입-->

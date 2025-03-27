@@ -24,7 +24,7 @@
       <li class="logins">
         <cr:choose>
         <cr:when test="${not empty sessionScope.memail}">
-        <a href="./logout.do"> ${sessionScope.memail}님 환영합니다. [로그아웃]</a>
+        ${sessionScope.mname}님 환영합니다. <a onclick="logout()"> [로그아웃]</a>
         </cr:when>
         <cr:otherwise>
         <span title="로그인"><a href="./login.do" title="회원가입"><img src="./ico/login.svg"></a></span>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,24 @@ public class member_controller {
 	
 	PrintWriter pw = null;
 	
+	//이메일 찾기
+	@PostMapping("/realty/search_email.do")
+	public String search_email (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpServletRequest req) throws Exception {
+		res.setContentType("text/html;charset=utf-8");
+		this.pw = res.getWriter();
+		
+		member_dto result = this.dao.search_email(dto);
+		
+		if(result != null) {
+			this.pw.write("ok");
+			req.setAttribute("memail", dto.getMemail());
+		} else {
+			this.pw.write("false");
+		}
+		return null;
+	}
+	
+	
 	//회원가입
 	@PostMapping("/realty/joinok.do")
 	public String joinok(member_dto m_dto,Model m) throws Exception {
@@ -36,7 +55,8 @@ public class member_controller {
 	
 	//로그인
 	@PostMapping("/realty/loginok.do")
-	public String loginok(@RequestParam("memail") String memail,@RequestParam("mpass") String mpass, HttpSession se,HttpServletResponse res)  {
+	public String loginok(@RequestParam("memail") String memail,@RequestParam("mpass") 
+	String mpass, HttpSession se,HttpServletResponse res)  {
 		res.setContentType("text/html;charset=utf-8");
 		try {
 			this.pw = res.getWriter();
@@ -45,6 +65,7 @@ public class member_controller {
 				this.pw.write("ok");
 				se.setAttribute("memail", loginfo.getMemail());
 				se.setAttribute("mname", loginfo.getMname());
+				System.out.println(loginfo.getMname());
 		
 			}else {
 				this.pw.write("false");
@@ -87,6 +108,18 @@ public class member_controller {
 	@GetMapping("/realty/member_join.do")
 	public String join()  {
 		return "realty/member_join";
+	}
+	
+	/////이메일찾기
+	@GetMapping("/realty/email_search.do")
+	public String email_search()  {
+		return "realty/email_search";
+	}
+	
+	/////비밀번호찾기
+	@GetMapping("/realty/passwd_search.do")
+	public String passwd_search()  {
+		return "realty/passwd_search";
 	}
 	
 	/////index링크
