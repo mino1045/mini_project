@@ -1,6 +1,6 @@
 -- name값은 중간 테이블의 컬럼명이 된다
 -- [중간테이블] cms + property_sale table
-INSERT INTO property_sale (psalsetype,typename) VALUES (3,'민간임대');
+INSERT INTO property_sale (psalsetype,typename) VALUES (4,'기타');
 select * from property_sale;
 
 
