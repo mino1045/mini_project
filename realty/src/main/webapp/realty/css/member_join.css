@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-.html_message{
-	color: red;
-	margin-left: 200px;
-}
-
 form {
 	font-family: 'Noto Sans KR';
 	font-size: 15px;

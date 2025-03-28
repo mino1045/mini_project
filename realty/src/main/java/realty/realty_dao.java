@@ -64,6 +64,17 @@ public class realty_dao implements mapper{
 		
 		return result;
 	}
+
+
+	@Override
+	public int update_pass(String memail, String mpass) {
+		Map<String, String> update_pass = new HashMap<String, String>();
+		update_pass.put("memail", memail);	
+		update_pass.put("mpass", mpass);	
+		int result = this.st.update("update_pass",update_pass);
+		
+		return result;
+	}
 	
 	
 

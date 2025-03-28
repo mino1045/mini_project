@@ -1,0 +1,6 @@
+function counsel(){
+	
+	
+	
+	frm.submit();
+};

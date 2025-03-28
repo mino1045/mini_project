@@ -4,6 +4,11 @@
 
 <!--member mapper-->
 
+<!--비밀번호 재설정-->
+<update id="update_pass">
+update member set mpass=#{mpass} where memail=#{memail}
+</update>
+
 
 <!--비밀번호 찾기/회원정보  -->
 <select id="search_pass" resultType="member_dto" parameterType="Map">
@@ -18,7 +23,7 @@ select memail,mtel,mname from member where mtel=#{mtel} and mname=#{mname}
 
 <!--로그인  -->
 <select id="member_login" resultType="member_dto" parameterType="Map">
-select memail,mpass,mname from member where memail=#{memail} and mpass=#{mpass}
+select memail,mpass,mname,mtel from member where memail=#{memail} and mpass=#{mpass}
 </select>
 
 <!--회원가입-->

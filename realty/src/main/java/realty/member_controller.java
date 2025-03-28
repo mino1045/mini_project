@@ -15,39 +15,118 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.cj.Session;
+
 
 @Controller
 public class member_controller {
 	@Resource(name = "member_dto")
 	private member_dto m_dto;
 	
+	@Resource(name = "cms_dto")
+	private cms_dto c_dto;
+	
 	@Resource(name = "realty_dao")
 	private realty_dao dao;
 	
 	PrintWriter pw = null;
 	
-	//비밀번호 찾기
-	@PostMapping("/realty/search_email.do")
-	public String search_pass (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpSession se) throws Exception {
 
-		res.setContentType("text/html;charset=utf-8");
-		this.pw = res.getWriter();
-
-		member_dto result = this.dao.search_pass(dto);
+	
+	
+	
+	@PostMapping()
+	public String counsel_insert (@ModelAttribute(name = "dto") cms_dto dto) {
 		
-		if(result != null) {
-			se.setAttribute("memail", result.getMemail());
-			System.out.println(result.getMemail());
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	///상담신청
+	@GetMapping("/realty/counsel.do")
+	public String counsel(HttpSession se, Model m) {
+
+		Boolean login = (Boolean) se.getAttribute("login");
+		String msg = "";
+		
+		if (login == null || !login ) { //세션 없으면 로그인 화면으로
+			msg = "alert('회원만 상담신청이 가능합니다');";
+			return "realty/login";
+		} else {
+
+			m.addAttribute("se_email",se.getAttribute("memail")) ;
+			m.addAttribute("se_mname",se.getAttribute("mname")) ;
+			m.addAttribute("se_mtel",se.getAttribute("mtel")) ;
+			return null;
+		}
+	}
+
+	
+	
+	///비밀번호 변경
+	@PostMapping("/realty/update_pass.do")
+	public void search_mypassok(HttpSession se, HttpServletResponse res, @RequestParam("mpass") String mpass) throws Exception  {
+		res.setContentType("text/html;charset=utf-8");
+		String memail = (String) se.getAttribute("pw_memail");
+		int result = this.dao.update_pass(memail,mpass);
+		
+		this.pw = res.getWriter();
+		
+		if (result > 0) {
 			this.pw.write("ok");
 		} else {
 			this.pw.write("false");
 		}
+		se.invalidate();
+		this.pw.close();
+	}
+	
+	
+	
+	
+	
+	/////비밀번호찾기ok
+	@GetMapping("/realty/search_mypass.do")
+	public String search_mypass(HttpSession se, Model m)  {
+		String memail = (String) se.getAttribute("pw_memail");
+		if (memail != null) {
+			m.addAttribute("memail",memail);
+
+		} else {
+			m.addAttribute("error","회원정보가 없습니다.");
+		}
+	
+		return "realty/search_mypass";
+	}
+	
+	
+	
+	
+	//비밀번호 찾기
+	@PostMapping("/realty/search_pass.do")
+	public String search_pass (@ModelAttribute(name = "dto") member_dto dto, HttpServletResponse res,HttpSession pw) throws Exception {
+
+		res.setContentType("text/html;charset=utf-8");
+		this.pw = res.getWriter();
+		member_dto result = this.dao.search_pass(dto);
+		
+		if(result != null) {
+			pw.setAttribute("pw_memail", result.getMemail());
+			this.pw.write("ok");
+		} else {
+			this.pw.write("false");
+		}
+		this.pw.close();
 		return null;
 	}
 	
 	
 
-	/////이메일찾기성공링크
+	/////이메일찾기성공
 	@GetMapping("/realty/search_myinfo.do")
 	public String search_myinfo(HttpSession se, Model m)  {
 		String memail = (String) se.getAttribute("memail");
@@ -60,29 +139,6 @@ public class member_controller {
 		return "realty/search_myinfo";
 	}
 
-	
-	/*
-	//이메일 찾기
-	@PostMapping("/realty/search_email.do")
-	public String search_email (@ModelAttribute(name = "dto") member_dto dto, Model m) throws Exception {
-
-		member_dto result = this.dao.search_email(dto);
-		System.out.println("로그확인");
-		System.out.println(result.getMemail());
-		if(result != null) {
-		m.addAttribute("memail",result.getMemail());
-
-		return "realty/search_myinfo";
-		} else {
-		m.addAttribute("error", "controller : 회원정보가 없습니다.");
-        return "realty/search_email";
-			
-		}
-
-	}
-	*/
-	
-	
 
 	//이메일 찾기
 	@PostMapping("/realty/search_email.do")
@@ -95,11 +151,11 @@ public class member_controller {
 		
 		if(result != null) {
 			se.setAttribute("memail", result.getMemail());
-			System.out.println(result.getMemail());
 			this.pw.write("ok");
 		} else {
 			this.pw.write("false");
 		}
+		this.pw.close();
 		return null;
 	}
 
@@ -116,7 +172,7 @@ public class member_controller {
 	//로그인
 	@PostMapping("/realty/loginok.do")
 	public String loginok(@RequestParam("memail") String memail,@RequestParam("mpass") 
-	String mpass, HttpSession se,HttpServletResponse res)  {
+	String mpass, HttpSession se,HttpServletResponse res, member_dto dto)  {
 		res.setContentType("text/html;charset=utf-8");
 		try {
 			this.pw = res.getWriter();
@@ -125,7 +181,9 @@ public class member_controller {
 				this.pw.write("ok");
 				se.setAttribute("memail", loginfo.getMemail());
 				se.setAttribute("mname", loginfo.getMname());
-				//System.out.println(loginfo.getMname());
+				se.setAttribute("mtel", loginfo.getMtel());
+				se.setAttribute("login", true);
+
 		
 			}else {
 				this.pw.write("false");
@@ -133,7 +191,7 @@ public class member_controller {
 		} catch (Exception e) {
 			
 		}
-	
+		this.pw.close();
 		return null;
 	}
 	

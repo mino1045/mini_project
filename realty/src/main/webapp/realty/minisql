@@ -1,0 +1,42 @@
+-- name값은 중간 테이블의 컬럼명이 된다
+-- [중간테이블] cms + property_sale table
+INSERT INTO property_sale (psalsetype,typename) VALUES (3,'민간임대');
+select * from property_sale;
+
+
+select * from property_sale;
+CREATE TABLE cms_property_sale (
+    cidx INT NOT NULL,
+    psalsetype INT NOT NULL,
+    PRIMARY KEY (cidx, psalsetype),
+    FOREIGN KEY (cidx) REFERENCES cms(cidx) ON DELETE CASCADE,
+    FOREIGN KEY (psalsetype) REFERENCES property_sale(psalsetype) ON DELETE CASCADE
+);
+
+
+
+-- 상담 ID (cms의 기본키)
+-- 부동산 유형 ID (property_type의 기본키)
+-- 복합 키 설정 (한 상담에서 같은 유형을 중복 저장 못하게 함)
+-- [중간테이블]cms + property_type table
+CREATE TABLE cms_property_type (
+    cidx INT NOT NULL,    
+    ptype INT NOT NULL,   
+    PRIMARY KEY (cidx, ptype), 
+    FOREIGN KEY (cidx) REFERENCES cms(cidx) ON DELETE CASCADE,
+    FOREIGN KEY (ptype) REFERENCES property_type(ptype) ON DELETE CASCADE
+);
+
+
+
+////상담 테이블 다중선택 정보는 제외
+create table cms(
+cidx int not null auto_increment,
+mname varchar(25) not null,        
+memail  varchar(100) not null,  
+mtel char(11) not null,
+cmsdate date not null,
+cmstext text not null,
+cdate timestamp not null default current_timestamp,
+primary key(cidx)
+);

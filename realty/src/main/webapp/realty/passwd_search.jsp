@@ -36,6 +36,6 @@
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
-<script src="./js/search.js?v=2"></script>
+<script src="./js/search.js?v=3"></script>
 
 </html>

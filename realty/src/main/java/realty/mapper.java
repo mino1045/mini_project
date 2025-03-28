@@ -10,4 +10,5 @@ public interface mapper {
 	member_dto member_login(String memail,String mpass);
 	member_dto search_email(member_dto dto);
 	member_dto search_pass(member_dto dto);
+	public int update_pass(String memail, String mpass);
 }
