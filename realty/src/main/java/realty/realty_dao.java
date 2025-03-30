@@ -1,12 +1,14 @@
 package realty;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("realty_dao")
 public class realty_dao implements mapper{
@@ -61,7 +63,6 @@ public class realty_dao implements mapper{
 		
 		member_dto result = this.st.selectOne("search_pass",getpassinfo);
 
-		
 		return result;
 	}
 
@@ -75,7 +76,46 @@ public class realty_dao implements mapper{
 		
 		return result;
 	}
-	
-	
 
+
+	@Override
+	public int insert_cms(cms_dto dto) { //cidx 값
+		return this.st.insert("insert_cms",dto);
+	}
+	
+    
+	public void insert_cms_trans(cms_dto dto,List<Integer> ptype,List<Integer> psalsetype) {
+		
+	int cidx = dto.getCidx();//위에서 실행된 cdix 선언
+	System.out.println("cidx 값 선언" + cidx);
+		if(cidx < 0) {
+			System.out.println("dto.getCidx() 오류임");
+			
+		}else {
+			insert_cms_property_sale(cidx, psalsetype);
+			insert_cms_property_type(cidx, ptype);
+			System.out.println("dao에 cidx값 넣기" + cidx);
+		}
+	}
+
+	@Override
+	public int insert_cms_property_type(int cidx, List<Integer> ptype) {
+		Map<String, Object> cms_property = new HashMap<String, Object>();
+		cms_property.put("cidx", cidx);
+		cms_property.put("ptype", ptype);
+		
+		int result = this.st.insert("insert_cms_property_type",cms_property);
+		return result;
+	}
+
+
+	@Override
+	public int insert_cms_property_sale(int cidx, List<Integer> psalsetype) {
+		Map<String, Object> cms_property = new HashMap<String, Object>();
+		cms_property.put("cidx", cidx);
+		cms_property.put("psalsetype", psalsetype);
+		
+		int result = this.st.insert("insert_cms_property_sale",cms_property);
+		return result;
+	}
 }

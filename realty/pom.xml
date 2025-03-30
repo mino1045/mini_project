@@ -168,6 +168,7 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.30</version>
   </dependency>
+  
   <!-- 
   <dependency>
     <groupId>com.oracle.database.jdbc</groupId>
@@ -180,6 +181,15 @@
     <version>5.1.49</version>
  </dependency>
  -->
+ <!-- transaction -->
+ 
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-tx</artifactId>
+    <version>5.3.39</version>
+</dependency>
+
+
   </dependencies>
   
   

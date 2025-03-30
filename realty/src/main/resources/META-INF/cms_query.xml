@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cms">
+
+<!--cms mapper-->
+<!--cms테이블-->
+<insert id="insert_cms" useGeneratedKeys="true" keyProperty="cidx">
+        insert into cms (mname,memail,mtel,cmsdate,cmstext,cdate)
+        values (#{mname},#{memail},#{mtel},#{cmsdate},#{cmstext},now())
+</insert>
+
+<!-- 중간테이블 cms + cms_property_type-->
+<insert id="insert_cms_property_type">
+insert into cms_property_type (cidx,ptype) values
+	<foreach collection="ptype" item="type" separator=",">
+	(#{cidx},#{type})
+	</foreach>
+</insert>
+
+<!-- 중간테이블 cms + cms_property_sale-->
+<insert id="insert_cms_property_sale">
+insert into cms_property_sale (cidx,psalsetype) values
+	<foreach collection="psalsetype" item="type" separator=",">
+	(#{cidx},#{type})
+	</foreach>
+</insert>
+
+
+
+</mapper>

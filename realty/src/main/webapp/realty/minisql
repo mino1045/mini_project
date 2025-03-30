@@ -29,7 +29,7 @@ CREATE TABLE cms_property_type (
 
 
 
-////상담 테이블 다중선택 정보는 제외
+////상담 테이블 
 create table cms(
 cidx int not null auto_increment,
 mname varchar(25) not null,        

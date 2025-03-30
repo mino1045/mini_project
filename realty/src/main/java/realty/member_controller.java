@@ -1,21 +1,22 @@
 package realty;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.mysql.cj.Session;
 
 
 @Controller
@@ -33,13 +34,27 @@ public class member_controller {
 	
 
 	
+	@Autowired
+	private realty_service rs;
 	
-	
-	@PostMapping()
-	public String counsel_insert (@ModelAttribute(name = "dto") cms_dto dto) {
-		
-		
-		return null;
+	@PostMapping("/realty/counselok.do")
+	public String counsel_insert (@ModelAttribute(name = "dto") cms_dto dto, Model m) {
+
+		String msg = "";
+		try {
+			rs.insert_cms_dao(dto, dto.getPtype(), dto.getPsalsetype());
+
+			System.out.println("쿼리문 성공");
+			msg = "담당자가 확인 후 해당 상담일시에 맞춰서 연락 드립니다.";
+			m.addAttribute("msg", msg);			
+			return "realty/index";
+
+		} catch (Exception e) {
+			System.out.println("컨트롤 실패");
+			msg = "alert('ecxeption 발동.')";
+
+			return null;
+		}
 	}
 	
 	

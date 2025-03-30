@@ -10,17 +10,25 @@
 <link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
 <link rel="stylesheet" type="text/css" href="./css/counsel.css?v=3">
 </head>
+<cr:if test="${not empty msg}">
+        <script type="text/javascript">
+        console.log("${msg}")
+            alert("${msg}");
+        </script>
+</cr:if>
 </head>
 <body>
 <!-- top -->
 <cr:import url="./top.jsp"></cr:import>
 
 
+
+
 <main>
 <!-- 상담신청 -->
 <section class="sub">
 <p>상담신청</p>
-
+<form action="./counselok.do" method="POST" id="frm">
 <div>
 <span class="list_title">◎ <span style="color: blue;">상담자 정보</span></span>
 <ul class="sub_ul">
@@ -54,7 +62,7 @@
 </ul>
 </div>
 <div><input type="button" value="상담신청" onclick="counsel()"></div>
-
+</form>
 
 </section>
 <!-- 상담신청 -->
@@ -64,6 +72,9 @@
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
+<script>
+
+</script>
 <script src="./js/cms.js?v=2"></script>
 <script src="./js/login.js?v=2"></script>
 </html>
