@@ -7,13 +7,18 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface mapper {
+	//property
+	List<property_dto> weekinfo(property_dto dto);
+	property_dto property_dto(String pidx);
+
+	
 	//member
-	public int member_join(member_dto m_dto);
+	int member_join(member_dto m_dto);
 	member_dto email_check(String memail);
 	member_dto member_login(String memail,String mpass);
 	member_dto search_email(member_dto dto);
 	member_dto search_pass(member_dto dto);
-	public int update_pass(String memail, String mpass);
+	int update_pass(String memail, String mpass);
 	
 	//cms
 	int insert_cms(cms_dto dto);

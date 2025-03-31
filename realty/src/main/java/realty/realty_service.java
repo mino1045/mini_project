@@ -17,13 +17,11 @@ public class realty_service {
 		try {
 			dao.insert_cms(dto);			
 			dao.insert_cms_trans(dto, ptype, psalsetype);
-			System.out.println("서비스 dao 트랜잭션 통과?");
 		} catch (Exception e) {
-			System.out.println("트랜젝션 실패");
 			throw e;
 		}
-
 	}
-
+	
+	
 
 }

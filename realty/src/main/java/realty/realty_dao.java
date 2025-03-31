@@ -118,4 +118,18 @@ public class realty_dao implements mapper{
 		int result = this.st.insert("insert_cms_property_sale",cms_property);
 		return result;
 	}
+
+
+	@Override
+	public List<property_dto> weekinfo(property_dto dto) {
+		List<property_dto> result = this.st.selectList("weekinfo",dto);
+		return result;
+	}
+
+
+	@Override
+	public property_dto property_dto(String pidx) {
+		property_dto result = this.st.selectOne("week_tails",pidx);
+		return result;
+	}
 }

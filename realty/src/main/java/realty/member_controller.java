@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class member_controller {
+	@Resource(name = "property_dto")
+	private property_dto p_dto;
+	
 	@Resource(name = "member_dto")
 	private member_dto m_dto;
 	
@@ -34,15 +37,33 @@ public class member_controller {
 	
 	@Autowired
 	private realty_service rs;
-	
+	/*
 	@GetMapping("/realty/weekinfo.do")
-	public String weekinfo(@ModelAttribute(name = "dto") cms_dto dto, Model m) {
-		
-		
+	public String weekinfo(@ModelAttribute(name = "dto") property_dto dto, Model m) {
+		property_dto result =  dao.weekinfo(dto);
+		m.addAttribute("property_dto",result);
+		System.out.println("dto" + result.paddress);
+		return null;
+	}
+	*/
+	
+	///예약
+	@PostMapping("/realty/reservation")
+	public String reservation (@RequestParam("pidx") String pidx,@RequestParam("pname") String pname, Model m) {
+		m.addAttribute("pidx",pidx);
+		m.addAttribute("pname",pname);
 		return null;
 	}
 	
+	///상세정보
+	@GetMapping("/realty/week_tails.do")
+	public String week_tails(@RequestParam("pidx") String pidx,property_dto dto, Model m) {
+		property_dto pidx_list = dao.property_dto(pidx);
+		m.addAttribute("pidx_list", pidx_list);
+		return null;
+	}
 	
+	///상담신청완료
 	@PostMapping("/realty/counselok.do")
 	public String counsel_insert (@ModelAttribute(name = "dto") cms_dto dto, Model m) {
 
@@ -263,10 +284,13 @@ public class member_controller {
 	
 	/////index링크
 	@GetMapping("/realty/index.do")
-	public String index()  {
+	public String index(Model m)  {
+
+			List<property_dto> property_dto =  dao.weekinfo(new property_dto());
+			m.addAttribute("property_dto",property_dto);
+			System.out.println(property_dto);
 		return "realty/index";
 	}
-
 
 
 }
