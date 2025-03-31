@@ -32,10 +32,16 @@ public class member_controller {
 	
 	PrintWriter pw = null;
 	
-
-	
 	@Autowired
 	private realty_service rs;
+	
+	@GetMapping("/realty/weekinfo.do")
+	public String weekinfo(@ModelAttribute(name = "dto") cms_dto dto, Model m) {
+		
+		
+		return null;
+	}
+	
 	
 	@PostMapping("/realty/counselok.do")
 	public String counsel_insert (@ModelAttribute(name = "dto") cms_dto dto, Model m) {

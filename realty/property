@@ -1,0 +1,34 @@
+
+insert into property values (0,'LH센트럴힐(공공임대)','서울시 송파구 문정동 12-2','아파트','공공임대','2025.04 분양','2027.02 입주','room1.jpg','개별난방,도시가스',1670,14,'GS건설㈜','오픈',now());
+insert into property values (0,'힐스테이트e편한세상파주','경기도 파주시 동패동 36-4','아파트','민간분양','2025.06 분양','2027.09 입주','room2.jpg','지역난방,열병합',1200,6,'(주)대광건영','접수',now());
+insert into property values (0,'청주가경아이파크6단지','청주시 가경동 64-3','아파트','민간분양','2025.08 분양','2028.01 입주','room3.jpg','개별난방,도시가스',600,4,'GS건설㈜','접수',now());
+insert into property values (0,'원봉공원힐데스하임','청주시 용암동 38-6','아파트','민간분양','2025.12 분양','2027.11 입주','room4.jpg','개별난방,도시가스',650,6,'(주)제일건설','접수',now());
+insert into property values (0,'청계리버뷰자이(민간분양)','서울시 성동구 용답동 3가 62-2','아파트','민간분양','2025.07 분양','2028.05 입주','room5.jpg','개별난방,도시가스',580,5,'롯데건설(주)','접수',now());
+insert into property values (0,'제일풍경채검단IV(AA22)','세종특별시 서구 원당동 21-4','아파트','민간분양','2025.10 분양','2026.11 입주','room6.jpg','지역난방,열병합',800,3,'(주)세담종합건설','접수',now());
+insert into property values (0,'소사역롯세캐슬더뉴엘','부천시 소사본동 2가 23','아파트','민간분양','2025.10 분양','2027.03 입주','room7.jpg','지역난방,열병합',1200,11,'(주)세담종합건설','접수',now());
+insert into property values (0,'삼익더랩소디','서울시 강서구 내발산동 3-2','아파트','공공임대','2025.04 분양','2026.12 입주','room8.jpg','개별난방,도시가스',800,7,'현대엔지니어링(주)','오픈',now());
+
+
+
+drop table property
+
+create table property(
+pidx int not null auto_increment,
+pname varchar(50) not null,
+paddress varchar(255) not null,
+ptype enum('아파트','빌라','오피스텔','창고','기타') not null,
+psalsetype enum('공공임대','민간분양','민간임대','기타') not null,
+psaledate varchar(15) not null,
+pmoveindate varchar(15) not null,
+pmig varchar(255) null,
+pheating varchar(50) not null,
+punit int not null,
+pblocks int not null,
+pbuilder varchar(50) not null,
+pstatus enum('오픈','접수') not null,
+pdate timestamp not null default current_timestamp,
+primary key(pidx)
+);
+
+
+select * from property_sale;
