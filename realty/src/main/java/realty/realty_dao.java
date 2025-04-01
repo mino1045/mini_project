@@ -132,4 +132,13 @@ public class realty_dao implements mapper{
 		property_dto result = this.st.selectOne("week_tails",pidx);
 		return result;
 	}
+
+
+	@Override
+	public int insert_res(reservation_dto dto) {
+		int result = this.st.insert("insert_res", dto);
+		
+		
+		return result;
+	}
 }

@@ -1,0 +1,14 @@
+create table reservation (
+ridx int unsigned auto_increment,
+pidx int not null,
+mtel char(11) not null,
+visit_date date not null,
+visit_time time not null,
+mname varchar(20) not null,
+pname varchar(50) not null,
+visitors tinyint(1) not null,
+rdate timestamp not null default current_timestamp,
+primary key (ridx)
+)
+
+drop table reservation

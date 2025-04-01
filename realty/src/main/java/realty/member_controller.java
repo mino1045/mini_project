@@ -48,7 +48,28 @@ public class member_controller {
 	*/
 	
 	///예약
-	@PostMapping("/realty/reservation")
+	
+	@PostMapping("/realty/reservation_check.do")
+	public String insert_res (@ModelAttribute(name = "dto") reservation_dto dto, Model m ,HttpSession se) {
+		dto.setMname((String) se.getAttribute("mname"));
+		dto.setMname((String) se.getAttribute("mtel"));
+		
+		int result = dao.insert_res(dto);
+		String msg = null;
+		
+		if(result > 0) {
+			m.addAttribute("dto",dto);
+			return null;
+		} else {
+			msg = "alert('방문예약 등록에 실패했습니다. 다시 시도해주세요')";
+			m.addAttribute(msg);
+		}
+	
+		return null;
+	}
+	
+	
+	@PostMapping("/realty/reservation.do")
 	public String reservation (@RequestParam("pidx") String pidx,@RequestParam("pname") String pname, Model m) {
 		m.addAttribute("pidx",pidx);
 		m.addAttribute("pname",pname);
@@ -57,10 +78,22 @@ public class member_controller {
 	
 	///상세정보
 	@GetMapping("/realty/week_tails.do")
-	public String week_tails(@RequestParam("pidx") String pidx,property_dto dto, Model m) {
-		property_dto pidx_list = dao.property_dto(pidx);
-		m.addAttribute("pidx_list", pidx_list);
-		return null;
+	public String week_tails(@RequestParam("pidx") String pidx,property_dto dto, Model m,HttpSession se) {
+
+		System.out.println("111111111111111111111111111111111111111");
+		Boolean login = (Boolean) se.getAttribute("login");
+		System.out.println("로그인여부"  + login);
+		
+		if (login == null || !login ) {
+
+			return "realty/login";
+
+		} else {
+			System.out.println("로그인했다고함;");
+			property_dto pidx_list = dao.property_dto(pidx);
+			m.addAttribute("pidx_list", pidx_list);
+			return null;
+		}
 	}
 	
 	///상담신청완료
@@ -201,15 +234,7 @@ public class member_controller {
 		return null;
 	}
 
-	//회원가입
-	@PostMapping("/realty/joinok.do")
-	public String joinok(member_dto m_dto,Model m) throws Exception {
-		int result = this.dao.member_join(m_dto);
-		String msg = "";
-		m.addAttribute(msg);
-		
-		return "realty/index";
-	}
+
 	
 	//로그인
 	@PostMapping("/realty/loginok.do")
@@ -235,6 +260,16 @@ public class member_controller {
 		}
 		this.pw.close();
 		return null;
+	}
+	
+	//회원가입
+	@PostMapping("/realty/joinok.do")
+	public String joinok(member_dto m_dto,Model m) throws Exception {
+		int result = this.dao.member_join(m_dto);
+		String msg = "";
+		m.addAttribute(msg);
+		
+		return "realty/index";
 	}
 	
 	//이메일 중복체크
@@ -285,7 +320,6 @@ public class member_controller {
 	/////index링크
 	@GetMapping("/realty/index.do")
 	public String index(Model m)  {
-
 			List<property_dto> property_dto =  dao.weekinfo(new property_dto());
 			m.addAttribute("property_dto",property_dto);
 			System.out.println(property_dto);

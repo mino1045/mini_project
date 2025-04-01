@@ -49,6 +49,7 @@ http://mybatis.org/schema/mybatis-spring.xsd
 <value>classpath:/META-INF/member_query.xml</value> <!--member mapper-->
 <value>classpath:/META-INF/cms_query.xml</value> <!--cms mapper-->
 <value>classpath:/META-INF/property_query.xml</value> <!--property mapper-->
+<value>classpath:/META-INF/res_query.xml</value> <!--reservation mapper-->
 </array>
 
 </property>

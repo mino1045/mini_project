@@ -44,16 +44,16 @@
                 <li>건설사</li>
 				<li>${pidx_list.pbuilder}</li>
                 <li>사진정보</li>
-				<li><img src="./room/{pidx_list.pmig}"></li>
+				<li><img src="./room/${pidx_list.pmig}"></li>
             </ul>
 		</div>
-		<!--예약 테이블에서 조회 후   -->
-		<form action="./reservation.do">
+			<%-- <cr:if test="${login}"></cr:if> --%>
+		<form action="./reservation.do" method="POST" id="frm">
         <div><button class="btn_css">방문예약</button></div>
         <input type="hidden" name="pidx" value="${pidx_list.pidx}">
         <input type="hidden" name="pname" value="${pidx_list.pname}">
         </form>
-        <div><button class="btn_close">방문예약완료</button></div>
+        <div><button class="btn_close" onclick="reservation()">방문예약완료</button></div>
 	</div>
 <!-- week_tails -->
 </main>
@@ -63,7 +63,10 @@
 
 </body>
 <script>
-
+function reservation() {
+	frm.submit()
+	
+}
 </script>
 
 </html>

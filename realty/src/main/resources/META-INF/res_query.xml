@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservation">
+
+<!--예약 등록-->
+<insert id="insert_res" useGeneratedKeys="true" keyProperty="ridx">
+insert into reservation (pidx,mtel,visit_date,visit_time,mname,pname,visitors,rdate) 
+values (#{pidx},#{mtel},#{visit_date},#{visit_time},#{mname},#{pname},#{visitors},now());
+</insert>
+</mapper>

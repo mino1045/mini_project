@@ -20,6 +20,7 @@
 	<typeAlias alias="member_dto" type="realty.member_dto"/>
 	<typeAlias alias="cms_dto" type="realty.cms_dto"/> 
 	<typeAlias alias="property_dto" type="realty.property_dto"/>
+	<typeAlias alias="reservation_dto" type="realty.reservation_dto"/>
 	
 </typeAliases>
 </configuration>

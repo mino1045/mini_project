@@ -10,6 +10,7 @@ public interface mapper {
 	//property
 	List<property_dto> weekinfo(property_dto dto);
 	property_dto property_dto(String pidx);
+	int insert_res(reservation_dto dto);
 
 	
 	//member

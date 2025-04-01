@@ -18,12 +18,6 @@ public class api_controller {
 	
 	@Resource(name = "realty_dao")
 	private realty_dao dao;
-	
-	
-	@GetMapping("/realty/md_choice")
-	public String md_choice() {
-		
-		return null;
-	}
+
 
 }
