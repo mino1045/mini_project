@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -37,24 +38,30 @@ public class member_controller {
 	
 	@Autowired
 	private realty_service rs;
-	/*
-	@GetMapping("/realty/weekinfo.do")
-	public String weekinfo(@ModelAttribute(name = "dto") property_dto dto, Model m) {
-		property_dto result =  dao.weekinfo(dto);
-		m.addAttribute("property_dto",result);
-		System.out.println("dto" + result.paddress);
+
+	
+	@GetMapping("/realty/md_board.do")
+	public String md_board () {
 		return null;
 	}
-	*/
 	
-	///예약
+
 	
+	//mdchoice글쓰기 링크
+	@GetMapping("/realty/md_board_write.do")
+	public String md_board_write()  {
+		return null;
+	}
+	
+	
+	//예약확인
 	@PostMapping("/realty/reservation_check.do")
 	public String insert_res (@ModelAttribute(name = "dto") reservation_dto dto, Model m ,HttpSession se) {
+
 		dto.setMname((String) se.getAttribute("mname"));
-		dto.setMname((String) se.getAttribute("mtel"));
-		
+		dto.setMtel((String) se.getAttribute("mtel"));
 		int result = dao.insert_res(dto);
+		
 		String msg = null;
 		
 		if(result > 0) {
@@ -64,11 +71,13 @@ public class member_controller {
 			msg = "alert('방문예약 등록에 실패했습니다. 다시 시도해주세요')";
 			m.addAttribute(msg);
 		}
-	
 		return null;
 	}
 	
 	
+
+	
+	//예약
 	@PostMapping("/realty/reservation.do")
 	public String reservation (@RequestParam("pidx") String pidx,@RequestParam("pname") String pname, Model m) {
 		m.addAttribute("pidx",pidx);

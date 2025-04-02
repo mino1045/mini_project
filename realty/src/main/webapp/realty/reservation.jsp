@@ -10,12 +10,11 @@ SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 String today = sd.format(date);
 
 Calendar cal = Calendar.getInstance();
-cal.add(Calendar.DATE, 1);
+cal.add(Calendar.DATE, 0);
 String min_date = sd.format(cal.getTime());
 
-cal.add(Calendar.MONTH, 6);
+cal.add(Calendar.MONTH, 1);
 String max_date = sd.format(cal.getTime());
-
 
 %>
 
@@ -46,10 +45,10 @@ String max_date = sd.format(cal.getTime());
 </span>
 <ul class="sub_ul">
 <li>방문일시</li>    
-<li><input type="date" class="sel_input" name="visit_date" min="<%=min_date%>" max="<%=max_date%>"  ></li> 
+<li><input type="date" class="sel_input" id="visit_date" min="<%=min_date%>" max="<%=max_date%>"  ></li> 
 <li>방문시간</li>    
 <li>
-<select class="sel_input2" name="visit_time">
+<select class="sel_input2" id="vt">
     <option value="">방문시간선택</option>
     <option value="09:00">09:00</option>
     <option value="11:00">11:00</option>
@@ -59,24 +58,26 @@ String max_date = sd.format(cal.getTime());
 </select> * 해당 시간에 맞춰서 방문해 주셔야 합니다.
 </li> 
 <li>방문자명</li>    
-<li><input type="text" class="sel_input" name="mname" value="${mname}" readonly></li> 
+<li><input type="text" class="sel_input" value="${mname}" readonly></li> 
 <li>방문인원</li>    
 <li>
-<label><input type="radio" name="visitors" value="1" class="sel_check" checked> 1명</label>
-<label><input type="radio" name="visitors" value="2" class="sel_check"> 2명</label> ※ 방문인원은 최대 2명까지 입니다.
+<label><input type="radio" name="nov" value="1" class="sel_check" checked> 1명</label>
+<label><input type="radio" name="nov" value="2" class="sel_check"> 2명</label> ※ 방문인원은 최대 2명까지 입니다.
 </li>   
 <li>연락처</li>    
 <li><input type="text" class="sel_input" name="mtel" value="${mtel}" readonly></li>       
 </ul>
 </div>
 <div>
+
+<input type="button" value="방문 예약등록" onclick="reservation()">
+
 <form action="./reservation_check.do" method="POST" id="frm">
 <input type="hidden" name="pname" value="${pname}">
 <input type="hidden" name="pidx" value="${pidx}">
 <input type="hidden" name="visit_date" value="">
 <input type="hidden" name="visit_time" value="">
 <input type="hidden" name="visitors" value="">
-<input type="button" value="방문 예약등록" onclick="reservation()">
 </form>
 </div>
 </section>
@@ -88,6 +89,6 @@ String max_date = sd.format(cal.getTime());
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
-<script src="./js/reservation.js?v=2"></script>
+<script src="./js/reservation.js?v=1"></script>
 
 </html>

@@ -1,0 +1,18 @@
+
+
+
+
+
+create table md_choice (
+mcidx int not null auto_increment,
+mc_title varchar(100) not null,
+mc_text text not null,
+mc_url varchar(2083) null,
+file_url text not null,
+file_name varchar(255) not null,
+file_new varchar(255) not null,
+mcdate timestamp not null default current_timestamp,
+primary key (mcidx)
+);
+
+drop table md_choice

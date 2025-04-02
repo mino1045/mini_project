@@ -137,8 +137,13 @@ public class realty_dao implements mapper{
 	@Override
 	public int insert_res(reservation_dto dto) {
 		int result = this.st.insert("insert_res", dto);
-		
-		
+		return result;
+	}
+
+	//md_choice_write
+	@Override
+	public int insert_mdc(md_choice_dto dto) {
+		int result = this.st.insert("insert_mdc",dto);
 		return result;
 	}
 }

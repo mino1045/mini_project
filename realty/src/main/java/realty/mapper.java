@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface mapper {
+	//md_choice
+	int insert_mdc(md_choice_dto dto);
+	
 	//property
 	List<property_dto> weekinfo(property_dto dto);
 	property_dto property_dto(String pidx);

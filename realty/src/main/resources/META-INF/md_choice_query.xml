@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="md_choice">
+
+<!--md_choice-->
+
+<insert id="insert_mdc">
+        insert into md_choice (mc_title,mc_text,mc_url,file_url,file_name,file_new,mcdate)
+        values (#{mc_title],#{mc_text},#{mc_url},#{file_url},#{file_name},#{file_new},now())
+</insert>
+
+</mapper>

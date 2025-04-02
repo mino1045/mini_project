@@ -45,7 +45,7 @@
 <li>방문인원</li>    
 <li>${dto.visitors}명 ※ 방문인원은 최대 2명까지 입니다.</li>   
 <li>연락처</li>    
-<li><input type="text" class="sel_input" ${dto.mtel} disabled></li>       
+<li><input type="text" class="sel_input" value="${dto.mtel}" disabled></li>       
 </ul>
 </div>
 <div>
