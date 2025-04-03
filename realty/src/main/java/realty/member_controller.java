@@ -40,11 +40,15 @@ public class member_controller {
 	private realty_service rs;
 
 	
+	@GetMapping("/realty/md_board_view.do")
+	public String md_board_view () {
+		return null;
+	}
+	
 	@GetMapping("/realty/md_board.do")
 	public String md_board () {
 		return null;
 	}
-	
 
 	
 	//mdchoice글쓰기 링크
@@ -89,7 +93,6 @@ public class member_controller {
 	@GetMapping("/realty/week_tails.do")
 	public String week_tails(@RequestParam("pidx") String pidx,property_dto dto, Model m,HttpSession se) {
 
-		System.out.println("111111111111111111111111111111111111111");
 		Boolean login = (Boolean) se.getAttribute("login");
 		System.out.println("로그인여부"  + login);
 		

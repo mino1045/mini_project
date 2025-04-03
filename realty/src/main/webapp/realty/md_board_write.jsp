@@ -73,6 +73,6 @@
 <script>
 
 </script>
-<script src="./js/md_board_write.js?v=1"></script>
+<script src="./js/md_board_write.js?v=2"></script>
 
 </html>

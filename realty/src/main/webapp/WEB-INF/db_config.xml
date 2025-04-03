@@ -45,11 +45,11 @@ http://mybatis.org/schema/mybatis-spring.xsd
 <property name="configLocation" value="classpath:/META-INF/config.xml"></property>
 <property name="mapperLocations"> 
 <array>
-
 <value>classpath:/META-INF/member_query.xml</value> <!--member mapper-->
 <value>classpath:/META-INF/cms_query.xml</value> <!--cms mapper-->
 <value>classpath:/META-INF/property_query.xml</value> <!--property mapper-->
 <value>classpath:/META-INF/res_query.xml</value> <!--reservation mapper-->
+<value>classpath:/META-INF/md_choice_query.xml</value> <!--md_choice mapper-->
 </array>
 
 </property>

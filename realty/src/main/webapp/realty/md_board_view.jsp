@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>추천분양 정보 게시판</title>
 <link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-<link rel="stylesheet" type="text/css" href="./css/md_board_view.css?v=5">
+<link rel="stylesheet" type="text/css" href="./css/md_board_view.css?v=1">
 <style>
 .box {
    width: 800px;

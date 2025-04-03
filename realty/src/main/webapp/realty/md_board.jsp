@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>추천분양 정보 게시판</title>
 <link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-<link rel="stylesheet" type="text/css" href="./css/md_board.css?v=5">
+<link rel="stylesheet" type="text/css" href="./css/md_board.css?v=1">
 <style>
 .box {
    width: 800px;
@@ -58,19 +57,14 @@
           <input type="button" value="검색" class="search_btn">
         </div>
     </section>
+    
+    
+    
 <!-- md_board -->
 
-
-
 </main>
-
 <!--copyright  -->
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
-<script>
-
-</script>
-<script src="./js/cms.js?v=2"></script>
-<script src="./js/login.js?v=2"></script>
 </html>

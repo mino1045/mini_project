@@ -3,7 +3,9 @@ function mdb_ok() {
 
     // formData에 값 추가 (name 속성 이용)
     formData.append("mc_title", document.getElementsByName("mc_title")[0].value);
-    formData.append("mc_text", document.getElementsByName("mc_text")[0].value);
+
+    var editorContent = CKEDITOR.instances.board_text.getData();
+    formData.append("mc_text", editorContent);
     formData.append("file", document.getElementsByName("file")[0].files[0]);  // 파일 한 개만 전송
 
     // Ajax 요청 (fetch API 사용)
@@ -16,9 +18,10 @@ function mdb_ok() {
 		if(data.trim() == "ok"){
         alert("게시물이 등록되었습니다.");
         console.log(data); // 디버깅용
-        window.location.href = "/md_board.do"; 
+        window.location.href = "./md_board.do"; 
 
 		} else {
+			console.log(data); 
 		alert("게시물 등록에 실패하였습니다.");
 
 		}

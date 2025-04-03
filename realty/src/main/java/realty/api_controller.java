@@ -49,12 +49,15 @@ public class api_controller {
 			this.callback = this.dao.insert_mdc(dto);
 			
 			if(this.callback > 0) { 
+				System.out.println("쿼리문성공");
 				return "ok";
 			} else {
+				System.out.println("쿼리문실패");
 				return "error";
 			}
 
 		} else {
+			System.out.println("파일못읽음");
 			return "error";
 		}
 	}

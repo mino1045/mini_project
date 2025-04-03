@@ -6,7 +6,7 @@
 
 <insert id="insert_mdc">
         insert into md_choice (mc_title,mc_text,mc_url,file_url,file_name,file_new,mcdate)
-        values (#{mc_title],#{mc_text},#{mc_url},#{file_url},#{file_name},#{file_new},now())
+        values (#{mc_title},#{mc_text},#{mc_url},#{file_url},#{file_name},#{file_new},now())
 </insert>
 
 </mapper>
