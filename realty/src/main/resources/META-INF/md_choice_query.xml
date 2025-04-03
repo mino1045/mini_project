@@ -4,9 +4,23 @@
 
 <!--md_choice-->
 
+<!--게시물 등록  -->
 <insert id="insert_mdc">
         insert into md_choice (mc_title,mc_text,mc_url,file_url,file_name,file_new,mcdate)
         values (#{mc_title},#{mc_text},#{mc_url},#{file_url},#{file_name},#{file_new},now())
 </insert>
+
+<!--게시물 목록 + 페이징  -->
+<select id="mdc_board_list" resultType="md_choice_dto" parameterType="Map">
+select * from md_choice order by desc limit #{startPage},#{endPage}
+</select>
+
+<!--총게시물수  -->
+<select id="mdc_board_count" resultType="int" parameterType="">
+select count(*) as total from md_choice
+</select>
+
+
+
 
 </mapper>

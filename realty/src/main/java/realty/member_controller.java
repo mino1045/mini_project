@@ -22,14 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class member_controller {
-	@Resource(name = "property_dto")
-	private property_dto p_dto;
-	
-	@Resource(name = "member_dto")
-	private member_dto m_dto;
-	
-	@Resource(name = "cms_dto")
-	private cms_dto c_dto;
 	
 	@Resource(name = "realty_dao")
 	private realty_dao dao;
@@ -47,10 +39,13 @@ public class member_controller {
 	
 	@GetMapping("/realty/md_board.do")
 	public String md_board () {
+		
+		
 		return null;
 	}
 
 	
+
 	//mdchoice글쓰기 링크
 	@GetMapping("/realty/md_board_write.do")
 	public String md_board_write()  {

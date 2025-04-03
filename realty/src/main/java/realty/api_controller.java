@@ -40,25 +40,19 @@ public class api_controller {
 			String url = req.getServletContext().getRealPath("/upload/");
 			FileCopyUtils.copy(file.getBytes(), new File(url + file_new)); //디렉토리에 파일 저장
 			
-			
 			dto.setFile_new(file_new); //새파일명
 			dto.setFile_name(file.getOriginalFilename()); //원본파일명
 			dto.setFile_url("/upload/" + file_new); //웹디렉토리경로
-		
-			//쿼리문
+
 			this.callback = this.dao.insert_mdc(dto);
 			
 			if(this.callback > 0) { 
-				System.out.println("쿼리문성공");
-				return "ok";
+				return "ok"; //파일업로드 성공
 			} else {
-				System.out.println("쿼리문실패");
-				return "error";
+				return "error"; //파일업로드 실패
 			}
-
 		} else {
-			System.out.println("파일못읽음");
-			return "error";
+			return "error";  //파일없음
 		}
 	}
 

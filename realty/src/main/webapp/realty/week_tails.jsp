@@ -48,12 +48,14 @@
             </ul>
 		</div>
 			<%-- <cr:if test="${login}"></cr:if> --%>
-		<form action="./reservation.do" method="POST" id="frm">
-        <div><button class="btn_css">방문예약</button></div>
+
+        <div><button class="btn_css" onclick="reservation()">방문예약</button></div>
+        <form action="./reservation.do" method="POST" id="frm">
         <input type="hidden" name="pidx" value="${pidx_list.pidx}">
         <input type="hidden" name="pname" value="${pidx_list.pname}">
-        </form>
-        <div><button class="btn_close" onclick="reservation()">방문예약완료</button></div>
+       	</form>
+	    <div><button class="btn_close">방문예약완료</button></div>
+
 	</div>
 <!-- week_tails -->
 </main>
