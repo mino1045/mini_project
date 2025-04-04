@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*") //CORS 
 @RestController
-
 public class api_controller {
 	@Resource(name = "realty_dao")
 	private realty_dao dao;
@@ -27,7 +26,6 @@ public class api_controller {
 	PrintWriter pw = null;
 	String result = null;
 	int callback = 0;
-	
 	
 	@PostMapping("/realty/mdb_ok.do")
 	public String mdb_ok(@ModelAttribute(name = "dto") md_choice_dto dto,

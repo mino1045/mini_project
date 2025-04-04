@@ -146,4 +146,46 @@ public class realty_dao implements mapper{
 		int result = this.st.insert("insert_mdc",dto);
 		return result;
 	}
+
+	//한 페이지에 출력할 게시물의 수 
+	Integer pageNum = 10;
+	
+	//총 게시물 수 
+	@Override 
+	public int mdc_board_count() {
+		int count = this.st.selectOne("mdc_board_count");
+		return count;
+	}
+	
+	//게시판 리스트 출력
+	@Override
+	public List<md_choice_dto> mdc_board_list(Integer pageno) {
+		int startPage = this.pageNum * (pageno - 1);
+		Map<String, Integer> paging = new HashMap<String, Integer>();
+		paging.put("startPage", startPage);
+		paging.put("endPage", this.pageNum);
+	
+		List<md_choice_dto> result = this.st.selectList("mdc_board_list", paging);
+		return result;
+	}
+
+	//검색 데이터 출력
+	@Override
+	public List<md_choice_dto> mdc_board_search(String search) {
+		List<md_choice_dto> result = this.st.selectList("mdc_board_search",search);
+		return result;
+	}
+
+
+	@Override
+	public md_choice_dto md_board_view(int mcidx) {
+		md_choice_dto result = this.st.selectOne("md_board_view",mcidx);		
+		return result;
+	}
+	
+
+	
+
+
+
 }

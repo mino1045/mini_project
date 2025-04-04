@@ -1,6 +1,4 @@
-
-
-
+select * from md_choice
 
 
 create table md_choice (
@@ -11,8 +9,9 @@ mc_url varchar(2083) null,
 file_url text not null,
 file_name varchar(255) not null,
 file_new varchar(255) not null,
+view int not null default 0,
 mcdate timestamp not null default current_timestamp,
 primary key (mcidx)
 );
 
-drop table md_choice
+insert into md_choice values (mc_title,mc_text,file_url,file_name,file_new,view,mcdate) ('제목','내용','','','',0,now());

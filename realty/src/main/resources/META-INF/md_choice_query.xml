@@ -4,6 +4,19 @@
 
 <!--md_choice-->
 
+
+<!--게시물 조회수  -->
+<update id="md_board_count">
+update md_choice set 
+</update>
+
+<!--게시물상세보기  -->
+<select id="md_board_view" resultType="md_choice_dto" parameterType="int">
+select * from md_choice where mcidx=#{mcidx}
+</select>
+
+
+
 <!--게시물 등록  -->
 <insert id="insert_mdc">
         insert into md_choice (mc_title,mc_text,mc_url,file_url,file_name,file_new,mcdate)
@@ -12,14 +25,19 @@
 
 <!--게시물 목록 + 페이징  -->
 <select id="mdc_board_list" resultType="md_choice_dto" parameterType="Map">
-select * from md_choice order by desc limit #{startPage},#{endPage}
+select * from md_choice order by mcidx desc limit #{startPage},#{endPage}
 </select>
 
 <!--총게시물수  -->
-<select id="mdc_board_count" resultType="int" parameterType="">
+<select id="mdc_board_count" resultType="int" parameterType="Map">
 select count(*) as total from md_choice
 </select>
 
+
+<!--게시물 제목 검색 -->
+<select id="mdc_board_search" resultType="md_choice_dto" parameterType="String">
+select * from md_choice where mc_title like concat('%',#{search},'%') order by mcidx desc
+</select>
 
 
 

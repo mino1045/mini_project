@@ -1,13 +1,19 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+Date date = new Date();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>추천분양 정보 게시판</title>
-<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-<link rel="stylesheet" type="text/css" href="./css/md_board.css?v=1">
+<link rel="stylesheet" type="text/css" href="./css/index.css?v=<%=date%>">
+<link rel="stylesheet" type="text/css" href="./css/md_board.css?v=<%=date%>">
 <style>
 .box {
    width: 800px;
@@ -36,26 +42,39 @@
             <li>조회수</li>
             <li>등록일</li>
           </ul>
-          <ul style="display: none;"><li class="nodata">등록된 게시물이 없습니다.</li></ul>
+          <cr:set var="ino" value="${total-userpage}"/>
+          <cr:if test="${total == 0}">
+          <ul><li class="nodata">등록된 게시물이 없습니다.</li></ul>
+          </cr:if>
+          <cr:forEach var="b" items="${boardList}" varStatus="bidx">
           <ul class="data_view">
-            <li>1</li>
-            <li style="text-align: left;">게시물 제목출력</li>
+
+            <li>${ino-bidx.index}</li>
+            <li style="text-align: left;">
+            <a href="./md_board_view.do?mcidx=${b.mcidx}">${b.mc_title}</a></li>
             <li>관리자</li>
-            <li>30</li>
-            <li>2025-03-31</li>
+            <li>${b.view}</li>
+            <li>${b.mcdate}</li>
+
           </ul>
+          </cr:forEach>
         </div>
         <div class="info_pageing">
           <ol>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+             <cr:set var="pageidx" value="${total / 10 + (1-((total/10)%1)) % 1}"/>
+      		 <cr:forEach var="no" begin="1" end="${pageidx}" step="1">
+            <li onclick="pg('${no}')">${no}</li>
+            </cr:forEach>
+
           </ol>
         </div>
         <div class="info_search">
-          <input type="text" class="search_text" placeholder="검색어를 입력하세요">
-          <input type="button" value="검색" class="search_btn">
+          <input type="text" class="search_text" placeholder="검색어를 입력하세요" id="search">
+          <input type="button" value="검색" class="search_btn" onclick="search()" >
         </div>
+        <form action="./md_board.do" method="get" id="search_form">
+        <input type="hidden" name="search">
+        </form>
     </section>
     
     
@@ -67,4 +86,17 @@
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
+<script>
+function pg(no) {
+	location.href = './md_board.do?pageno='+no;
+}
+
+function search() {
+	var keyword = document.getElementById("search").value;
+	search_form.search.value = keyword;
+	search_form.submit();
+	
+	
+}
+</script>
 </html>

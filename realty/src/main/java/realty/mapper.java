@@ -8,7 +8,13 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface mapper {
 	//md_choice
-	int insert_mdc(md_choice_dto dto);
+	int insert_mdc(md_choice_dto dto); //게시판 글쓰기
+	List<md_choice_dto> mdc_board_list(Integer pageno); //게시판리스트
+	List<md_choice_dto> mdc_board_search(String search);  //검색 데이터
+	int mdc_board_count(); //게시물 수
+	md_choice_dto md_board_view(int mcidx);//게시물 상세보기
+	
+	 //게시판 검색
 	
 	//property
 	List<property_dto> weekinfo(property_dto dto);

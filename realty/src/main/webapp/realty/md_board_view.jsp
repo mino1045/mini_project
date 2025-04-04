@@ -32,17 +32,17 @@
         <div class="info_board">
           <ul>
             <li>제&nbsp;&nbsp;&nbsp;목</li>
-            <li>제목이 출력되는 곳</li>
+            <li>${dto.mc_title}</li>
             <li>글쓴이</li>
-            <li>글쓴이가 출력되는 곳</li>
+            <li>관리자</li>
             <li>등록일</li>
-            <li>2025-03-31</li>
+            <li>${dto.mcdate}</li>
             <li>조회수</li>
             <li>200</li>
             <li class="litext">내&nbsp;&nbsp;&nbsp;용</li>
             <li class="litext">
                 <div class="textarea">
-                    내용이 출력 되는 곳
+                    ${dto.mc_text}
                 </div>
             </li>
           </ul>

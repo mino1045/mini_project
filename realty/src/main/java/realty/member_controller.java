@@ -32,13 +32,51 @@ public class member_controller {
 	private realty_service rs;
 
 	
+
+	//게시물 상세정보
 	@GetMapping("/realty/md_board_view.do")
-	public String md_board_view () {
+	public String md_board_view(@ModelAttribute(name = "dto") md_choice_dto dto, Model m) {
+		
+		int mcidx = dto.getMcidx();
+		md_choice_dto detail = dao.md_board_view(mcidx);
+
+;		m.addAttribute("dto", detail);
 		return null;
 	}
 	
+	
+	
+	//md_choice 게시판
 	@GetMapping("/realty/md_board.do")
-	public String md_board () {
+	public String md_board (Model m,
+			@RequestParam(defaultValue = "",required = false)String search, 
+			@RequestParam(defaultValue = "1", required = false) Integer pageno) {
+		
+		//총 게시물 수 
+		int total = this.dao.mdc_board_count();
+		
+	    if (pageno < 1) {
+	        pageno = 1;
+	    }
+
+		int userpage = 0;
+		if(pageno == 1) {
+			userpage = 0;
+		} else {
+			userpage = (userpage - 1) * 10;
+		}
+		m.addAttribute("userpage",userpage);
+		
+		//게시판 리스트
+		List<md_choice_dto> boardList = null;
+		if (search.equals("")) { //검색어가 없다면
+			 boardList = dao.mdc_board_list(pageno);
+		} else {
+			boardList = dao.mdc_board_search(search);
+		}
+		m.addAttribute("boardList",boardList);
+		m.addAttribute("total",total);
+		m.addAttribute("search",search);
 		
 		
 		return null;
