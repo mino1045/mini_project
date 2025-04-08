@@ -63,7 +63,7 @@ Date date = new Date();
   <script>
     //해당 함수는 모델 하우스 사전 방문예약 확인 리스트 페이지로 이동 되도록 합니다.
     function reserve_page() {
-
+    	location.href = "./reservation_list.do";
     }
     function myinfo_menu(part){
         var log_menu = document.getElementById("login_info");

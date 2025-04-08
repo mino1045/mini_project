@@ -4,6 +4,8 @@
 
 <!--property mapper-->
 
+
+
 <select id="weekinfo" resultType="property_dto">
 select * from property order by pidx desc
 </select>

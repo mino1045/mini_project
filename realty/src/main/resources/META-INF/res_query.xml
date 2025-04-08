@@ -3,6 +3,20 @@
 <mapper namespace="reservation">
 
 <!--예약 등록-->
+<!--방문예약 확인  -->
+<select id="reservation_check" parameterType="Map" resultType="int">
+select count(*) from reservation where pidx=#{pidx} and mtel=#{mtel}
+</select>
+
+
+<delete id="reservation_delete" parameterType="Map">
+delete from reservation where ridx=#{ridx} and mtel=#{mtel}
+</delete>
+
+<select id="reservation_list" resultType="reservation_dto"> <!--전화번호로 예약리스트 출력  -->
+select * from reservation where mtel=#{mtel}
+</select>
+
 <insert id="insert_res" useGeneratedKeys="true" keyProperty="ridx">
 insert into reservation (pidx,mtel,visit_date,visit_time,mname,pname,visitors,rdate) 
 values (#{pidx},#{mtel},#{visit_date},#{visit_time},#{mname},#{pname},#{visitors},now());

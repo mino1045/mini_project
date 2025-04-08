@@ -49,7 +49,7 @@
 </ul>
 </div>
 <div>
-<input type="button" value="메인페이지로 이동">
+<input type="button" value="메인페이지로 이동" onclick="location.href='./index.do'">
 </div>
 </section>
 <!-- reservation_check -->

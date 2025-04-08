@@ -54,7 +54,7 @@ Date date = new Date();
             <a href="./md_board_view.do?mcidx=${b.mcidx}">${b.mc_title}</a></li>
             <li>관리자</li>
             <li>${b.view}</li>
-            <li>${b.mcdate}</li>
+            <li>${fn:substring(b.mcdate,0,10)}</li>
 
           </ul>
           </cr:forEach>

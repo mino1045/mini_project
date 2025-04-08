@@ -182,6 +182,23 @@ public class realty_dao implements mapper{
 		md_choice_dto result = this.st.selectOne("md_board_view",mcidx);		
 		return result;
 	}
+
+
+	@Override
+	public List<reservation_dto> reservation_list(String mtel) {
+		List<reservation_dto> result = this.st.selectList("reservation_list",mtel);
+		return result;
+	}
+
+
+	@Override
+	public int reservation_delete(String mtel, int ridx) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("mtel", mtel);
+		parm.put("ridx", ridx);
+		int result = this.st.delete("reservation_delete", parm);
+		return result;
+	}
 	
 
 	

@@ -7,6 +7,10 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface mapper {
+	//reservation
+	int reservation_delete(String mtel,int ridx); //예약리스트 삭제
+	List<reservation_dto> reservation_list(String mtel); //예약리스트 출력
+	
 	//md_choice
 	int insert_mdc(md_choice_dto dto); //게시판 글쓰기
 	List<md_choice_dto> mdc_board_list(Integer pageno); //게시판리스트

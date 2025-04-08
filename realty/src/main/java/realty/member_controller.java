@@ -1,9 +1,11 @@
 package realty;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,9 +32,47 @@ public class member_controller {
 	
 	@Autowired
 	private realty_service rs;
-
+	
 	
 
+	
+	//예약리스트 삭제
+	@PostMapping ("/realty/reservation_delete.do")
+	public String reservation_delete(HttpSession se,@RequestParam int ridx, HttpServletResponse res) throws IOException {
+		System.out.println("삭제번호" + ridx);
+		
+		String mtel = (String) se.getAttribute("mtel");
+		int result = dao.reservation_delete(mtel, ridx);
+	
+
+		this.pw = res.getWriter();
+		if(result > 0) {
+			this.pw.write("ok");
+		} else {
+			this.pw.write("error");
+		}
+		return null;
+	}
+	
+	
+	
+	//예약리스트
+	@GetMapping ("/realty/reservation_list.do")
+	public String reservation_list (Model m ,HttpSession se) {
+
+		String mtel = (String) se.getAttribute("mtel");
+
+		List<reservation_dto> res_list = dao.reservation_list(mtel);
+		
+		if(!res_list.equals("") || !res_list.equals(null)) {
+			m.addAttribute("res_list",res_list);
+			return null;
+		} else {
+			
+			return null;
+		}
+	}
+	
 	//게시물 상세정보
 	@GetMapping("/realty/md_board_view.do")
 	public String md_board_view(@ModelAttribute(name = "dto") md_choice_dto dto, Model m) {
@@ -130,11 +170,10 @@ public class member_controller {
 		System.out.println("로그인여부"  + login);
 		
 		if (login == null || !login ) {
-
 			return "realty/login";
 
 		} else {
-			System.out.println("로그인했다고함;");
+			int res = 0;
 			property_dto pidx_list = dao.property_dto(pidx);
 			m.addAttribute("pidx_list", pidx_list);
 			return null;
