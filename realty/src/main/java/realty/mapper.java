@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface mapper {
 	//reservation
+	int reserved(int pidx,String mtel); //예약여부
 	int reservation_delete(String mtel,int ridx); //예약리스트 삭제
 	List<reservation_dto> reservation_list(String mtel); //예약리스트 출력
 	
@@ -22,7 +23,7 @@ public interface mapper {
 	
 	//property
 	List<property_dto> weekinfo(property_dto dto);
-	property_dto property_dto(String pidx);
+	property_dto property_dto(int pidx);
 	int insert_res(reservation_dto dto);
 
 	

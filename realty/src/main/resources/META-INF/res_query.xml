@@ -4,7 +4,7 @@
 
 <!--예약 등록-->
 <!--방문예약 확인  -->
-<select id="reservation_check" parameterType="Map" resultType="int">
+<select id="reserved" parameterType="Map" resultType="int">
 select count(*) from reservation where pidx=#{pidx} and mtel=#{mtel}
 </select>
 

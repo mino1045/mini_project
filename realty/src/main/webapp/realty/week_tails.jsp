@@ -48,14 +48,18 @@
             </ul>
 		</div>
 			<%-- <cr:if test="${login}"></cr:if> --%>
-
+		<cr:choose>
+		<cr:when test="${count == 0}">
         <div><button class="btn_css" onclick="reservation()">방문예약</button></div>
         <form action="./reservation.do" method="POST" id="frm">
         <input type="hidden" name="pidx" value="${pidx_list.pidx}">
         <input type="hidden" name="pname" value="${pidx_list.pname}">
        	</form>
+       	</cr:when>
+  		<cr:when test="${not empty count}">
 	    <div><button class="btn_close">방문예약완료</button></div>
-
+	    </cr:when>
+		</cr:choose>
 	</div>
 <!-- week_tails -->
 </main>

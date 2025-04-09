@@ -33,9 +33,8 @@ public class member_controller {
 	@Autowired
 	private realty_service rs;
 	
-	
 
-	
+
 	//예약리스트 삭제
 	@PostMapping ("/realty/reservation_delete.do")
 	public String reservation_delete(HttpSession se,@RequestParam int ridx, HttpServletResponse res) throws IOException {
@@ -156,7 +155,11 @@ public class member_controller {
 	
 	//예약
 	@PostMapping("/realty/reservation.do")
-	public String reservation (@RequestParam("pidx") String pidx,@RequestParam("pname") String pname, Model m) {
+	public String reservation (@RequestParam("pidx") int pidx,@RequestParam("pname") String pname, Model m) {
+		
+		//예약여부
+		
+
 		m.addAttribute("pidx",pidx);
 		m.addAttribute("pname",pname);
 		return null;
@@ -164,17 +167,24 @@ public class member_controller {
 	
 	///상세정보
 	@GetMapping("/realty/week_tails.do")
-	public String week_tails(@RequestParam("pidx") String pidx,property_dto dto, Model m,HttpSession se) {
+	public String week_tails(@RequestParam("pidx") int pidx,property_dto dto, Model m,HttpSession se) {
 
 		Boolean login = (Boolean) se.getAttribute("login");
-		System.out.println("로그인여부"  + login);
+
 		
 		if (login == null || !login ) {
 			return "realty/login";
 
 		} else {
-			int res = 0;
+
+			int count = this.dao.reserved(pidx, (String) se.getAttribute("mtel"));
 			property_dto pidx_list = dao.property_dto(pidx);
+			
+			System.out.println(pidx + "건물번호");
+			System.out.println(count + "카운트");
+
+			
+			m.addAttribute("count",count);
 			m.addAttribute("pidx_list", pidx_list);
 			return null;
 		}

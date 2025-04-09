@@ -41,8 +41,9 @@
             <li>인원수</li>
             <li>취소</li>
           </ul>
+          <cr:if test="${empty res_list}">
           <ul style="display: block;"><li class="nodata">등록된 방문 예약이 없습니다.</li></ul>
-        
+        	</cr:if>
           <cr:forEach var="r" items="${res_list}">
           <ul class="data_view">
             <li>1</li>

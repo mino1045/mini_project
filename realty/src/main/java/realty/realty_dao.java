@@ -128,7 +128,7 @@ public class realty_dao implements mapper{
 
 
 	@Override
-	public property_dto property_dto(String pidx) {
+	public property_dto property_dto(int pidx) {
 		property_dto result = this.st.selectOne("week_tails",pidx);
 		return result;
 	}
@@ -197,6 +197,16 @@ public class realty_dao implements mapper{
 		parm.put("mtel", mtel);
 		parm.put("ridx", ridx);
 		int result = this.st.delete("reservation_delete", parm);
+		return result;
+	}
+
+
+	@Override
+	public int reserved(int pidx, String mtel) {
+		Map<String, Object> cdata = new HashMap<String, Object>();
+		cdata.put("pidx", pidx);
+		cdata.put("mtel", mtel);
+		int result = this.st.selectOne("reserved",cdata);
 		return result;
 	}
 	
