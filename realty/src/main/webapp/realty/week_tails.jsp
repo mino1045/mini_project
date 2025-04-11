@@ -71,7 +71,7 @@
 <script>
 function reservation() {
 	frm.submit()
-	
+
 }
 </script>
 
