@@ -30,7 +30,7 @@ public interface mapper {
 	//member
 	int member_join(member_dto m_dto);
 	member_dto email_check(String memail);
-	member_dto member_login(String memail,String mpass);
+	member_dto member_login(String memail,String mpass,String login_channel);
 	member_dto search_email(member_dto dto);
 	member_dto search_pass(member_dto dto);
 	int update_pass(String memail, String mpass);

@@ -18,5 +18,14 @@ function reservation(){
 	frm.visit_time.value = vt;
 	frm.visitors.value = novselected;
 	console.log(frm.visitors.value);
+	
+	
+	if(!frm.visit_date.value){
+		alert("방문일시를 선택해주세요");
+	}else if(!frm.visit_time.value){
+		alert("방문시간을 선택해주세요");
+	}else {
 	frm.submit();
+	}
+
 }

@@ -8,6 +8,7 @@ function email_reg(){
 	var mail_reg = /^[0-9a-z_-]+@[0-9a-zㄱ-힇\.]+\.[0-9a-zㄱ-힇\.]{2,}$/i;
 
 
+	
 	if(!mail_reg.test(memail)){
 		email_message.textContent = "올바른 이메일 주소를 입력해주세요.";
 		return false;
@@ -64,6 +65,10 @@ function pwck(){
 
 	mpass_message.textContent = "";
 	
+	if(kakao_id != null){
+		return true;
+	}
+	
 	if(!mpass){
 		mpass_message.textContent = "비밀번호를 입력해주세요";
 		return false;
@@ -72,7 +77,9 @@ function pwck(){
 		return false;
 	} else if(mpass != mpasscheck) { //
 	mpass_message.textContent = "동일한 비밀번호를 입력해주세요";
+	console.log("동일한 비밀번호를 입력해주세요");
 	return false;
+
 	
 	} else {
 		return true;
@@ -108,7 +115,9 @@ function telck(){
 
 	if(!tel_reg.test(mtel)){
 		tel_message.textContent = "유효한 전화번호를 입력해주세요.";
+		console.log("유효한 전화번호를 입력해주세요");
 		return false;
+
 	} else {
 		return true;
 	}
@@ -140,9 +149,9 @@ checkall.addEventListener("change", function() {
 
 //////////회원가입
 function join(){
-	var pc = pwck();
-	var nc = nmck();
-	var tc = telck()
+	var pc = pwck(); //비밀번호 유효성검사
+	var nc = nmck(); //이름 유효성검사
+	var tc = telck() //전화번호 유효성검사
 	var m_dup = document.getElementById("email_dup"); //이메일중복체크값
 	
 	function termck(){
@@ -159,10 +168,16 @@ function join(){
 	}
 	
 	var termck = termck()
+	if(kakao_id != null){
+		//m_dup.value=="Y";
+		pc = true;
+	}
+	
 	if(m_dup.value=="Y" && pc && nc && tc && termck ){
 	f.submit();
 	} else if(m_dup.value=="N"){
 		alert("아이디 중복체크를 해주세요")
+		console.log("아이디중복체크");
 	
 	} else {
 		alert("입력값을 확인해주세요")

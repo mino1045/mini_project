@@ -26,10 +26,11 @@ public class realty_dao implements mapper{
 
 	/////member_login
 	@Override
-	public member_dto member_login(String memail, String mpass) {
+	public member_dto member_login(String memail, String mpass, String login_channel) {
 		Map<String, String> loginfo = new HashMap<String, String>();
 		loginfo.put("memail", memail);
 		loginfo.put("mpass", mpass);
+		loginfo.put("login_channel", login_channel);
 	
 		member_dto result = this.st.selectOne("member_login",loginfo);
 		return result;

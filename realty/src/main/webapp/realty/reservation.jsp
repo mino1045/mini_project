@@ -89,6 +89,6 @@ String max_date = sd.format(cal.getTime());
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
-<script src="./js/reservation.js?v=1"></script>
+<script src="./js/reservation.js?v=4"></script>
 
 </html>

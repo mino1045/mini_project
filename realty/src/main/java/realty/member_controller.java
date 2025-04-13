@@ -332,23 +332,60 @@ public class member_controller {
 	
 	//로그인
 	@PostMapping("/realty/loginok.do")
-	public String loginok(@RequestParam("memail") String memail,@RequestParam("mpass") 
-	String mpass, HttpSession se,HttpServletResponse res, member_dto dto)  {
-		res.setContentType("text/html;charset=utf-8");
-		try {
-			this.pw = res.getWriter();
-			member_dto loginfo = this.dao.member_login(memail, mpass);
-			if(loginfo != null) {
-				this.pw.write("ok");
-				se.setAttribute("memail", loginfo.getMemail());
-				se.setAttribute("mname", loginfo.getMname());
-				se.setAttribute("mtel", loginfo.getMtel());
-				se.setAttribute("login", true);
-
+	public String loginok(
+			@RequestParam("memail") String memail,
+			@RequestParam(name ="mpass", required = false) String mpass,
+			@RequestParam(name ="kakao_id",required = false) String kakao_id,
+			@RequestParam(name ="kakao_nicknm",required = false) String kakao_nicknm,
+			@RequestParam(name ="login_channel",required = false) String login_channel,
+			HttpSession se,Model m,member_dto dto) {
 		
-			}else {
-				this.pw.write("false");
+		
+		try {
+			String msg = "";
+			System.out.println("로그인채널" + login_channel);
+			System.out.println("카카오아이디" + kakao_id);
+			if(login_channel.equals("1")) { //웹페이지 회원
+
+				member_dto loginfo = this.dao.member_login(memail, mpass, login_channel);
+
+				if(loginfo != null) {
+					se.setAttribute("memail", loginfo.getMemail());
+					se.setAttribute("mname", loginfo.getMname());
+					se.setAttribute("mtel", loginfo.getMtel());
+					se.setAttribute("login", true);
+					
+					msg = "alert('로그인 하셨습니다.'); location.href='./index.do';";
+				}else {
+					msg = "alert('아이디 및 패스워드를 확인하세요'); history.go(-1);";
+
+				}
+				m.addAttribute("msg",msg);
 			}
+			
+			else if(login_channel.equals("2")) { //카카오 로그인
+				member_dto loginfo = this.dao.member_login(kakao_id, kakao_id, login_channel);
+
+				
+				if(loginfo != null) { //회원일 시 session 등록
+					se.setAttribute("memail", loginfo.getMemail());
+					se.setAttribute("mname", loginfo.getMname());
+					se.setAttribute("mtel", loginfo.getMtel());
+					se.setAttribute("login", true);
+					
+					msg = "alert('로그인 하셨습니다.'); location.href='./index.do';";
+				}else {
+					msg = "alert('카카오 사용자로 로그인 시 간편회원가입이 필요합니다.');"
+							+ "sessionStorage.setItem('mid','"+ kakao_id +"');"
+							+ "sessionStorage.setItem('mnick','"+ kakao_nicknm +"');"
+							+ "location.href='./member_join.do';";
+				}
+				m.addAttribute("msg",msg);
+				
+			}
+			return "realty/return";
+
+
 		} catch (Exception e) {
 			
 		}
@@ -363,7 +400,7 @@ public class member_controller {
 		String msg = "";
 		m.addAttribute(msg);
 		
-		return "realty/index";
+		  return "redirect:/realty/index.do";
 	}
 	
 	//이메일 중복체크
@@ -384,7 +421,7 @@ public class member_controller {
 		HttpSession se = req.getSession();
 		se.invalidate();
 		
-		return "realty/index";
+		  return "redirect:/realty/index.do";
 	}
 	
 	/////로그인링크
