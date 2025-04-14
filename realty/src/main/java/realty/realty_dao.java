@@ -210,6 +210,15 @@ public class realty_dao implements mapper{
 		int result = this.st.selectOne("reserved",cdata);
 		return result;
 	}
+
+
+	@Override
+	public int view_count(int mcidx) {
+		int result = this.st.update("view_count",mcidx);
+		return result;
+	}
+
+
 	
 
 	

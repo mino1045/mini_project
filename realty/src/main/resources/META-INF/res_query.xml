@@ -3,6 +3,7 @@
 <mapper namespace="reservation">
 
 <!--예약 등록-->
+
 <!--방문예약 확인  -->
 <select id="reserved" parameterType="Map" resultType="int">
 select count(*) from reservation where pidx=#{pidx} and mtel=#{mtel}

@@ -1,4 +1,17 @@
-//form
+//네이버로그인
+function naver_login(){
+	  	var naver_id_login = new naver_id_login("hMTcrqeBiDBKziWywM7w", "YOUR_CALLBACK_URL");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("YOUR_SERVICE_URL");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+}
+
+
+
+//카카오 로그인
 Kakao.init('48cd2b3fa4c8dbc5ca9ce8c95ea65af4');
 function kakao_login(){
 	//JavaScript SDK v1	//v2 => 팝업지원하지 않음

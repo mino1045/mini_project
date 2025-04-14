@@ -44,9 +44,9 @@
           <cr:if test="${empty res_list}">
           <ul style="display: block;"><li class="nodata">등록된 방문 예약이 없습니다.</li></ul>
         	</cr:if>
-          <cr:forEach var="r" items="${res_list}">
+          <cr:forEach var="r" items="${res_list}" varStatus="status">
           <ul class="data_view">
-            <li>1</li>
+            <li>${total - status.index}</li>
             <li style="text-align: left;">${r.pname}</li>
             <li>${r.visit_date}</li>
             <li>${r.visit_time}</li>

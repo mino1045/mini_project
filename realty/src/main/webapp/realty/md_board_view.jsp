@@ -38,7 +38,7 @@
             <li>등록일</li>
             <li>${dto.mcdate}</li>
             <li>조회수</li>
-            <li>200</li>
+            <li>${dto.view}</li>
             <li class="litext">내&nbsp;&nbsp;&nbsp;용</li>
             <li class="litext">
                 <div class="textarea">

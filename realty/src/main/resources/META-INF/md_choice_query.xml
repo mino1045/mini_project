@@ -4,10 +4,9 @@
 
 <!--md_choice-->
 
-
 <!--게시물 조회수  -->
-<update id="md_board_count">
-update md_choice set 
+<update id="view_count">
+update md_choice set view = view + 1 where mcidx = #{mcidx} 
 </update>
 
 <!--게시물상세보기  -->

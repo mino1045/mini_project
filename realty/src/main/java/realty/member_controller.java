@@ -2,10 +2,12 @@ package realty;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class member_controller {
+	
+	@Resource(name = "m_viewCount")
+	private m_viewCount viewCount;
 	
 	@Resource(name = "realty_dao")
 	private realty_dao dao;
@@ -57,30 +62,45 @@ public class member_controller {
 	
 	//예약리스트
 	@GetMapping ("/realty/reservation_list.do")
-	public String reservation_list (Model m ,HttpSession se) {
-
+	public String reservation_list (Model m ,HttpSession se) 
+	
+	{
 		String mtel = (String) se.getAttribute("mtel");
+		
 
+		//게시글 총 수량 int total = this.dao.reservation_total();
+
+		
 		List<reservation_dto> res_list = dao.reservation_list(mtel);
 		
+		//게시글 총 수량
+		int total = res_list.size();
+		m.addAttribute("total",total);
 		if(!res_list.equals("") || !res_list.equals(null)) {
 			m.addAttribute("res_list",res_list);
 			return null;
 		} else {
-			
 			return null;
 		}
 	}
 	
 	//게시물 상세정보
 	@GetMapping("/realty/md_board_view.do")
-	public String md_board_view(@ModelAttribute(name = "dto") md_choice_dto dto, Model m) {
+	public String md_board_view(@ModelAttribute(name = "dto") md_choice_dto dto,
+			Model m,
+			HttpServletRequest req,
+			HttpServletResponse res
+			) {
 		
 		int mcidx = dto.getMcidx();
 		md_choice_dto detail = dao.md_board_view(mcidx);
-
-;		m.addAttribute("dto", detail);
-		return null;
+		
+		//조회수 처리
+		if(this.viewCount.viewCountIncrease(req, res, "md_board", mcidx)) { //viewCount가 true면
+			this.dao.view_count(mcidx); //쿼리문 실행
+		}
+		m.addAttribute("dto", detail);
+		return "realty/md_board_view";
 	}
 	
 	
@@ -113,6 +133,11 @@ public class member_controller {
 		} else {
 			boardList = dao.mdc_board_search(search);
 		}
+
+		
+		
+		
+		
 		m.addAttribute("boardList",boardList);
 		m.addAttribute("total",total);
 		m.addAttribute("search",search);

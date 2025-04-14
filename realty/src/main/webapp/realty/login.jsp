@@ -36,6 +36,7 @@
 		<div><input type="password" name="mpass" placeholder="비밀번호"></div>
 		<div><input type="button" value="로그인" onclick="logincheck()"></div>
 		<div><input type="button" value="카카오로그인" class="kakao_btn" onclick="kakao_login()"></div>
+		<div><input type="button" value="네이번로그인" class="naver_btn" onclick="naver_login()"></div>
 		<span id="login_message" class="html_message"></span>
 
 		<div>
@@ -53,7 +54,9 @@
 <cr:import url="./copyright.jsp"></cr:import>
 
 </body>
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/v1/kakao.js"></script>
+<script type="./js/jquery.js"></script>
 <script src="./js/login.js?v=3"></script>
 
 </html>

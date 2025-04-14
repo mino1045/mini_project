@@ -18,6 +18,7 @@ public interface mapper {
 	List<md_choice_dto> mdc_board_search(String search);  //검색 데이터
 	int mdc_board_count(); //게시물 수
 	md_choice_dto md_board_view(int mcidx);//게시물 상세보기
+	int view_count(int mcidx);
 	
 	 //게시판 검색
 	
