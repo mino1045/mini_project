@@ -219,6 +219,13 @@ public class realty_dao implements mapper{
 	}
 
 
+	@Override
+	public List<md_choice_dto> md_choice(int limit) {
+		List<md_choice_dto> result = this.st.selectList("md_choice",limit);
+		return result;
+	}
+
+
 	
 
 	

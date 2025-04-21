@@ -13,6 +13,7 @@ public interface mapper {
 	List<reservation_dto> reservation_list(String mtel); //예약리스트 출력
 	
 	//md_choice
+	List<md_choice_dto> md_choice(int limit); //메인용
 	int insert_mdc(md_choice_dto dto); //게시판 글쓰기
 	List<md_choice_dto> mdc_board_list(Integer pageno); //게시판리스트
 	List<md_choice_dto> mdc_board_search(String search);  //검색 데이터

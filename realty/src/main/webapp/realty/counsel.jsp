@@ -11,8 +11,7 @@
 <link rel="stylesheet" type="text/css" href="./css/counsel.css?v=3">
 </head>
 <cr:if test="${not empty msg}">
-        <script type="text/javascript">
-        console.log("${msg}")
+        <script>
             alert("${msg}");
         </script>
 </cr:if>

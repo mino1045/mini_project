@@ -178,9 +178,6 @@ function join(){
 	} else if(m_dup.value=="N"){
 		alert("아이디 중복체크를 해주세요")
 		console.log("아이디중복체크");
-	
-	} else {
-		alert("입력값을 확인해주세요")
 	}
 
 }

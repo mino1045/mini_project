@@ -22,6 +22,11 @@ select * from md_choice where mcidx=#{mcidx}
         values (#{mc_title},#{mc_text},#{mc_url},#{file_url},#{file_name},#{file_new},now())
 </insert>
 
+<!--main용 -->
+<select id="md_choice" resultType="md_choice_dto" parameterType="int">
+select * from md_choice order by mcidx desc limit #{limit}
+</select>
+
 <!--게시물 목록 + 페이징  -->
 <select id="mdc_board_list" resultType="md_choice_dto" parameterType="Map">
 select * from md_choice order by mcidx desc limit #{startPage},#{endPage}

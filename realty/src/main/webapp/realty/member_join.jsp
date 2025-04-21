@@ -10,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="./css/index.css?v=2">
 <link rel="stylesheet" type="text/css" href="./css/member_join.css?v=3">
 <style>
+.html_message{
+	margin-left: 200px;
+    color: #ff6600;
+}
+
 .box {
    width: 800px;
    height: 300px;

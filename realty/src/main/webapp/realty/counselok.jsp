@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-상담성공화면
+<script>
+alert('${msg}'); 
+location.href = './index.do'; 
+</script>
 </body>
 </html>
