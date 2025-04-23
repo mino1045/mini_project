@@ -70,17 +70,16 @@ public class member_controller {
 		}
 	}
 
-	//md_choice - main
-	@GetMapping("/realty/mdchoice.do")
-	public String mdchoice(Model m) {
-		
-		int limit = 5;
-		List<md_choice_dto> mdchoice = this.dao.md_choice(limit);
-		m.addAttribute("mdchoice",mdchoice);
-		System.out.println(mdchoice);
-		
-		return "realty/mdchoice";
-	}
+	/*
+	 * //md_choice - main
+	 * 
+	 * @GetMapping("/realty/mdchoice.do") public String mdchoice(Model m) {
+	 * 
+	 * int limit = 5; List<md_choice_dto> mdchoice = this.dao.md_choice(limit);
+	 * m.addAttribute("mdchoice",mdchoice); System.out.println(mdchoice);
+	 * 
+	 * return "realty/mdchoice"; }
+	 */
 	
 	// md_choice 게시물 상세정보
 	@GetMapping("/realty/md_board_view.do")
@@ -89,6 +88,8 @@ public class member_controller {
 
 		int mcidx = dto.getMcidx();
 		md_choice_dto detail = dao.md_board_view(mcidx);
+		detail.setMc_title(detail.getMc_title().replaceAll("(?i)<br\\s*/?>", " "));
+
 
 		// 조회수 처리
 		if (this.viewCount.viewCountIncrease(req, res, "md_board", mcidx)) { // viewCount가 true면
@@ -125,7 +126,11 @@ public class member_controller {
 		} else {
 			boardList = dao.mdc_board_search(search);
 		}
-
+		for (md_choice_dto dto : boardList) {
+		    // 리스트에서만 제목을 한 줄로 보이게
+		    dto.setMc_title(dto.getMc_title().replaceAll("(?i)<br\\s*/?>", " "));
+		}
+		
 		m.addAttribute("boardList", boardList);
 		m.addAttribute("total", total);
 		m.addAttribute("search", search);
@@ -434,10 +439,13 @@ public class member_controller {
 	///// index링크
 	@GetMapping("/realty/index.do")
 	public String index(Model m) {
+		//weekinfo
 		List<property_dto> property_dto = dao.weekinfo(new property_dto());
 		m.addAttribute("property_dto", property_dto);
 		System.out.println(property_dto);
-		int limit = 5;
+		
+		//mdchoice
+		int limit = 4;
 		List<md_choice_dto> mdchoice = this.dao.md_choice(limit);
 		m.addAttribute("mdchoice",mdchoice);
 		return "realty/index";

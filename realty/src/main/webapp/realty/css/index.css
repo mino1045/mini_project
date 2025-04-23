@@ -458,6 +458,7 @@ footer{
 }
 
 .logos {
+  width: 170px;
   height: 100px;
   object-fit: cover;
 }

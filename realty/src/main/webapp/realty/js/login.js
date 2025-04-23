@@ -1,9 +1,66 @@
 //네이버로그인
+function naverLoginDirect() {
+    // 클라이언트 ID
+    var clientId = "hMTcrqeBiDBKziWywM7w";
+    // 콜백 URL
+    var callbackUrl = encodeURIComponent("http://localhost:8080/realty/realty/naver_callback.jsp");
+    // 상태 토큰 생성 (보안용)
+    var state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    // 로컬 스토리지에 상태 저장
+    localStorage.setItem("naver_oauth_state", state);
+    
+    // 네이버 로그인 URL 생성
+    var naverAuthUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + clientId + 
+                       "&redirect_uri=" + callbackUrl + "&state=" + state;
+    
+    // 팝업 창 열기
+    var naverPopup = window.open(naverAuthUrl, "네이버 로그인", "width=700,height=500");
+    
+    // 팝업 차단 확인
+    if (naverPopup == null || typeof(naverPopup) == 'undefined') {
+        alert("팝업 차단이 설정되어 있습니다. 팝업 차단을 해제해 주세요.");
+    }
+}
+/*window.onload = function() {
+    // 네이버 로그인 객체 생성
+    var naver_id_login = new naver_id_login("hMTcrqeBiDBKziWywM7w", "http://localhost:8080/realty/realty/naver_callback.jsp");
+    
+    // 버튼 생성 및 설정
+    naver_id_login.setButton("white", 2, 40);
+    naver_id_login.setDomain("http://localhost:8080");
+    naver_id_login.setState(naver_id_login.getUniqState());
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();
+    
+    // 버튼 텍스트 변경
+    var naverId = document.getElementById("naver_id_login").firstChild;
+    if(naverId) {
+        naverId.innerText = "네이버 로그인";
+        naverId.className = "naver_btn";
+    }
+};*/
+
+/*function naver_login() {
+    // 네이버 로그인 객체 생성 - 올바른 ClientID와 콜백 URL 확인
+    var naverLogin = new naver.LoginWithNaverId({
+        clientId: "hMTcrqeBiDBKziWywM7w", 
+        callbackUrl: "http://localhost:8080/realty/realty/naver_callback.jsp",
+        isPopup: true,
+        loginButton: {color: "green", type: 3, height: 40}
+    });
+    
+    // 네이버 로그인 초기화
+    naverLogin.init();
+    }
+*/
+
+
+
 function naver_login(){
-	  	var naver_id_login = new naver_id_login("hMTcrqeBiDBKziWywM7w", "YOUR_CALLBACK_URL");
+	 var naver_id_login = new naver_id_login("hMTcrqeBiDBKziWywM7w", "http://localhost:8080/realty/realty/naver_callback.jsp");
   	var state = naver_id_login.getUniqState();
   	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("YOUR_SERVICE_URL");
+  	naver_id_login.setDomain("http://localhost:8080");
   	naver_id_login.setState(state);
   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
